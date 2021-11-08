@@ -3,7 +3,7 @@ morgan = require('morgan');
 const app = express();
 
 //Morgan middleware library to log all requests
-app.use(morgan('common',next));
+app.use(morgan('common'));
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -69,7 +69,7 @@ app.get('/', (req, res) => {
     console.log('Your app is listening on port 8080.');
   });
 
-  //express.static to serve “documentation.html” file (from the public folder ? (to create ?))
+  //express.static to serve “documentation.html” file
   app.use('/documentation.html', express.static('public'));
   
 
