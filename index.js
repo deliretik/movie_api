@@ -10,6 +10,9 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
   });
 
+//express.static to serve “documentation.html” file
+app.use('/documentation.html', express.static('public'));
+
 //Express GET route located at the endpoint “/movies” that returns a JSON object containing data about top 10 movies.
 let top10Movies = [
     {
@@ -69,8 +72,7 @@ app.get('/', (req, res) => {
     console.log('Your app is listening on port 8080.');
   });
 
-  //express.static to serve “documentation.html” file
-  app.use('/documentation.html', express.static('public'));
+  
   
 
 
