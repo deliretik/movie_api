@@ -9,3 +9,64 @@
 <p>The web application will provide users with access to information about different
     movies, directors, and genres. Users will be able to sign up, update their
     personal information, and create a list of their favorite movies.</p>
+<br>
+
+<h2>List of URL endpoints and request methods that correlate with each of the operations</h2>
+<table>
+	<tr>
+	  <th>Business logic</th>
+	  <th>URL</th>
+	  <th>HTTP Method</th>
+	  <th>Request body data format</th>
+	  <th>Response body data format</th>
+	</tr>
+	<tr>
+	  <td>get a list of all movies</td>
+	  <td>/movies</td>
+	  <td>get</td>
+	  <td>none</td>
+	  <td>a JSON object holding data about all movies</td>				
+	</tr>
+	<tr>
+		<td>get data about a single movie by name</td>
+		<td>/movies/[movie]/[name]</td>
+		<td>get</td>
+		<td>none</td>
+		<td>a JSON object holding data about a single movie, containing an ID, a title, description, genre, director, and an image URL example: <br>{<br>id: 1,<br>title: "Fight club",<br>decription: "text",<br>genre: "text",<br>Director: {<br> Birth year: 1980,<br> Bio:"text"<br>}<br>Image URL<br>}</td>				
+	  </tr>
+	  <tr>
+		<td>New user registration</td>
+		<td>user/</td>
+		<td>post</td>
+		<td>a JSON object holding data about the user to add, structured like :<br>{<br>name: "full name"}</td>
+		<td>a JSON object holding data about the registered user, including an ID:<br>{<br>id: 2,<br>name: "full name",<br>}</td>				
+	  </tr>
+	  <tr>
+		<td>User informations update</td>
+		<td>/user/[name]</td>
+		<td>post</td>
+		<td>a JSON object holding data about the user to update, structured like :<br>{<br>name: "full name"}</td>
+		<td>a JSON object holding data about the user updated informations, including an ID:<br>{<br>id: 2,<br>Old name: "full name",<br>New name: "full name"<br>}</td>				
+	  </tr>
+	  <tr>
+		<td>user de-registration</td>
+		<td>/user</td>
+		<td>post</td>
+		<td>none</td>
+		<td>A text message indicating that the user account have been removed</td>				
+	  </tr>	
+	  <tr>
+		<td>add a movie to user's list of movies</td>
+		<td>/user/[userMovieList]</td>
+		<td>post</td>
+		<td>none</td>
+		<td>A text message indicating that the user added a movie to his list</td>				
+	  </tr>
+	  <tr>
+		<td>remove a movie to user's list of movies</td>
+		<td>/user/[userMovieList]</td>
+		<td>delete</td>
+		<td>none</td>
+		<td>A text message indicating that the user removed a movie from his list</td>				
+	  </tr>
+  </table>
