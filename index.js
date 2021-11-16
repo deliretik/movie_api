@@ -16,7 +16,7 @@ app.use((err, req, res, next) => {
   });
 
 //express.static to serve “documentation.html” file
-app.use('/documentation.html', express.static('public'));
+app.use(express.static('public'));
 
 //Express GET route located at the endpoint “/movies” that returns a JSON object containing data about top 10 movies.
 let movies = [
