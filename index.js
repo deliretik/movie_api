@@ -41,16 +41,17 @@ let movies = [
     }
   }];
 //user's data 
-  let user = [
+  let users = [
     {
+      user:
+      {
       id:1,
       name: 'omar alaoui',
       userMovieList: {
       title: 'Harry Potter and the Sorcerer\'s Stone'
       }
-    }
-
-  ];
+      }
+    }];
   
 // GET request that get a textual response
 app.get('/', (req, res) => {
