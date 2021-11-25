@@ -15,6 +15,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 //Morgan middleware library to log all requests
 app.use(morgan('common'));
@@ -59,8 +62,15 @@ app.get('/', (req, res) => {
   });
 
   // Gets the list of all movies
-  app.get('/movies', (req, res) => {
-    res.json(movies);
+  app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Movies.find()
+      .then((movies) => {
+        res.status(201).json(movies);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      });
   });
 
   //get data about a single movie by name
