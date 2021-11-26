@@ -51,7 +51,7 @@
 	</tr>
 	<tr>
 		<td>add a user</td>
-		<td>/user</td>
+		<td>/users/login</td>
 		<td>post</td>
 		<td>a JSON object holding data about the user to add, structured like :<br>{<br>Username: {type: String, required: true},<br>Password: {type: String, required: true},<br>Email: {type: String, required: true},<br>Birthday: Date,<br>FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]<br>}</td>
 		<td>a JSON object holding data about the registered user, including an ID:<br>{<br>id: ,<br>Username: {type: String, required: true},<br>Password: {type: String, required: true},<br>Email: {type: String, required: true},<br>Birthday: Date,<br>}</td>				
