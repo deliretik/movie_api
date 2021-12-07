@@ -5,8 +5,8 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 //connecting DB (CONNECTION URI)
-//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const express = require('express'),
   bodyParser = require('body-parser'),
@@ -17,11 +17,15 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const passport = require('passport');
+require('./passport'); // should i remove that line ?
+app.use(passport.initialize());
 const cors = require('cors');
 app.use(cors());
 let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
+
+
 const { check, validationResult } = require('express-validator');
 
 //Morgan middleware library to log all requests
@@ -62,9 +66,9 @@ let movies = [
     }];
   
 // GET request that get a textual response
-app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/'), (req, res) => {
     res.send('Welcome to your Flix');
-  });
+  };
 
   // Gets the list of all movies
   app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -85,18 +89,18 @@ app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   });
 
 //Add a user
-app.post('/users/:login', [
+app.post('/users', [
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()
 ], 
-passport.authenticate('jwt', { session: false }), (req, res) => {
+ (req, res) => {
   let errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
+     if (!errors.isEmpty()) {
+       return res.status(422).json({ errors: errors.array() });
+     }
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -211,7 +215,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
   
   // listen for requests
-  const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
 });
