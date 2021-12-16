@@ -40,35 +40,35 @@ app.use((err, req, res, next) => {
 app.use(express.static('public'));
 
 //Express GET route located at the endpoint “/movies” that returns a JSON object containing data about top 10 movies.
-let movies = [
-  {
-    movie: 
-    {
-      title: 'Harry Potter and the Sorcerer\'s Stone',
-      genre: 'Thriller',
-      director: {
-        name:'J.K. Rowling',
-        birth: 1980
-      }
-    }
-  }];
-//user's data 
-  let users = [
-    {
-      user:
-      {
-      id:1,
-      name: 'omar alaoui',
-      userMovieList: {
-      title: 'Harry Potter and the Sorcerer\'s Stone'
-      }
-      }
-    }];
+// let movies = [
+//   {
+//     movie: 
+//     {
+//       title: 'Harry Potter and the Sorcerer\'s Stone',
+//       genre: 'Thriller',
+//       director: {
+//         name:'J.K. Rowling',
+//         birth: 1980
+//       }
+//     }
+//   }];
+// //user's data 
+//   let users = [
+//     {
+//       user:
+//       {
+//       id:1,
+//       name: 'omar alaoui',
+//       userMovieList: {
+//       title: 'Harry Potter and the Sorcerer\'s Stone'
+//       }
+//       }
+//     }];
   
 // GET request that get a textual response
-app.get('/'), (req, res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to your Flix');
-  };
+  });
 
   // Gets the list of all movies
   app.get('/movies', 
